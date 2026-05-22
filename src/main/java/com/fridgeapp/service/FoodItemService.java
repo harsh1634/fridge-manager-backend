@@ -26,8 +26,8 @@ public class FoodItemService {
         return foodItemRepository.findById(id);
     }
 
-    public List<FoodItem> findAllByUserId(Long userId) {
-        return foodItemRepository.findByUserId(userId);
+    public List<FoodItem> findAllByCreatedBy(Long createdBy) {
+        return foodItemRepository.findByCreatedBy(createdBy);
     }
 
     public List<FoodItem> findAll() {

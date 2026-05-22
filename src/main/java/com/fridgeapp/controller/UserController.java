@@ -1,5 +1,6 @@
 package com.fridgeapp.controller;
 
+import com.fridgeapp.dto.UserCreateRequest;
 import com.fridgeapp.entity.User;
 import com.fridgeapp.service.UserService;
 import org.springframework.http.HttpStatus;
@@ -19,8 +20,8 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<User> createUser(@RequestBody User user) {
-        User saved = userService.save(user);
+    public ResponseEntity<User> createUser(@RequestBody UserCreateRequest request) {
+        User saved = userService.save(request.getUsername(), request.getPassword(), request.getEmail());
         return new ResponseEntity<>(saved, HttpStatus.CREATED);
     }
 

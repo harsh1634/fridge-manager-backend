@@ -20,13 +20,8 @@ public class FoodItem {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // Maps back to the User table
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
-
-    @Column(nullable = false)
-    private String name;
+    @Column(name = "item_name", nullable = false)
+    private String itemName;
 
     @Column(length = 500)
     private String description;
@@ -34,18 +29,24 @@ public class FoodItem {
     @Column(nullable = false)
     private String category; // e.g., Dairy, Vegetable, Fruit
 
-    @CreationTimestamp
-    @Column(name = "storage_date", updatable = false)
-    private LocalDate storageDate;
-
-    @Column(name = "expiry_date")
-    private LocalDate expiryDate;
-
-    @Column(precision = 10, scale = 2)
+    @Column(precision = 10, scale = 2, nullable = false)
     private BigDecimal quantity;
 
     @Column(length = 50)
     private String unit; // e.g., kg, pieces, ml
+
+    @CreationTimestamp
+    @Column(name = "storage_date", nullable = false, updatable = false)
+    private LocalDate storageDate;
+
+    @Column(name = "expiry_date", nullable = false)
+    private LocalDate expiryDate;
+
+    @Column(name = "created_by", columnDefinition = "bigint references users(id)", nullable = false, updatable = false)
+    private Long createdBy;
+
+    @Column(name = "modified_by", columnDefinition = "bigint references users(id)")
+    private Long modifiedBy;
 
     @Column(length = 100)
     private String location; // e.g., Crisper Drawer, Door
