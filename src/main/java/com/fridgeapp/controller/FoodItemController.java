@@ -38,7 +38,7 @@ public class FoodItemController {
 
     @GetMapping("/user/{userId}")
     public ResponseEntity<List<FoodItem>> getFoodItemsByUser(@PathVariable Long userId) {
-        return ResponseEntity.ok(foodItemService.findAllByCreatedBy(userId));
+        return ResponseEntity.ok(foodItemService.findAllByUserId(userId));
     }
 
     @PutMapping("/{id}")

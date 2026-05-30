@@ -8,5 +8,5 @@ import java.util.List;
 
 @Repository
 public interface FoodItemRepository extends JpaRepository<FoodItem, Long> {
-    List<FoodItem> findByCreatedBy(Long createdBy);
+    List<FoodItem> findByCreatedById(Long userId);
 }
