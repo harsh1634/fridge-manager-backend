@@ -1,5 +1,6 @@
 package com.fridgeapp.service;
 
+import com.fridgeapp.dto.UserCreateRequest;
 import com.fridgeapp.entity.User;
 import com.fridgeapp.repository.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -22,12 +23,12 @@ public class UserService {
         this.passwordEncoder = passwordEncoder;
     }
 
-    public User save(String username, String password, String email) {
-        User newUser = new User();
-        newUser.setUsername(username);
-        newUser.setPasswordHash(passwordEncoder.encode(password));
-        newUser.setEmail(email);
-        newUser.setCreatedAt(LocalDate.now());
+    public User save(UserCreateRequest userInfo) {
+        User newUser = User.builder()
+                .username(userInfo.getUsername())
+                .passwordHash(passwordEncoder.encode(userInfo.getPassword()))
+                .email(userInfo.getEmail())
+                .build();
         return userRepository.save(newUser);
     }
 
